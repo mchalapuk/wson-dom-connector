@@ -5,7 +5,7 @@ var xpathPosition = require('simple-xpath-position');
 
 module.exports = forAllDomInterfaces;
 
-function DomXPathConnector(NodeConstructor, documentNode) {
+function XPathConnector(NodeConstructor, documentNode) {
   function xPathFromNode(node) {
     return [ xpathPosition.fromNode(node, documentNode) ];
   }
@@ -20,9 +20,23 @@ function DomXPathConnector(NodeConstructor, documentNode) {
   };
 }
 
-var DomInterfaces = [
+function SingletonConnector(NodeConstructor, getter) {
+  function checkSameDocument(node) {
+    if (node !== getter()) {
+      throw new Error('The supplied node is not contained by the root node.');
+    }
+    return [];
+  }
+
+  return {
+    by: NodeConstructor,
+    split: checkSameDocument,
+    create: getter
+  }
+}
+
+var XPathableDomInterfaces = [
   'Node','Text', 'Comment', 'CDATASection', 'ProcessingInstruction', 'Element',
-  'Document', 'XMLDocument', 'DocumentFragment', 'DocumentType', 'Window',
   'HTMLAnchorElement', 'HTMLAppletElement', 'HTMLAreaElement', 'HTMLAudioElement',
   'HTMLBaseElement', 'HTMLBodyElement', 'HTMLBRElement', 'HTMLButtonElement', 'HTMLCanvasElement',
   'HTMLDataElement', 'HTMLDataListElement', 'HTMLDialogElement', 'HTMLDirectoryElement',
@@ -67,12 +81,15 @@ var DomInterfaces = [
 
 function forAllDomInterfaces(window, document) {
   var connectors = {};
-  DomInterfaces.forEach(function(name) {
+  XPathableDomInterfaces.forEach(function(name) {
     if (typeof window[name] === 'undefined') {
       return;
     }
-    connectors[name] = new DomXPathConnector(window[name], document);
+    connectors[name] = new XPathConnector(window[name], document);
   });
+  connectors.Window = new SingletonConnector(window.Window, function() { return window; });
+  connectors.Document = new SingletonConnector(window.Document, function() { return document; });
+  connectors.XMLDocument = new SingletonConnector(window.XMLDocument, function() { return document; });
   return connectors;
 }
 
