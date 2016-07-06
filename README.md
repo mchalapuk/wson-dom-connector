@@ -21,16 +21,16 @@
 [![devDependency Status][david-image-dev]][david-url-dev]
 [![License][license-image]][license-url]
 
-[WSON][wson] is a human-readable data-interchange format that supports cyclic
+[WSON][wson] is a human-readable data-interchange format with support for cyclic
 structures. This module is an extension to wson that enables serializing
-[DOM][dom] nodes to their [xpaths][xpath] and parse those xpaths back to DOM
+[DOM][dom] nodes to their [xpaths][xpath] and parsing those xpaths back to DOM
 nodes.
 
 [wson]: https://github.com/tapirdata/wson
 [dom]: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model
 [xpath]: https://www.w3.org/TR/xpath/
 
-Possible use cases:
+**Possible Use Cases**
 
  1. Store references to DOM elements between page reloads,
  2. Record DOM events to later simulate a user during automated test.
@@ -87,4 +87,3 @@ Please refer to [wson's documentation][wson] for further details.
 
 Copyright &copy; 2016 Maciej Chałapuk.
 Released under [MIT license](LICENSE).
-
