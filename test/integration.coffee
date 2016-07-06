@@ -5,8 +5,8 @@ _ = require 'underscore'
 jsdom = require 'jsdom'
 WSON = require 'wson'
 
-#delete require.cache[ require.resolve '../' ]
-DomXPathConnector = require '../'
+delete require.cache[ require.resolve '../' ]
+connectors = require '../'
 
 describe 'WSON with DomXPathConnector', ->
   document = null
@@ -16,7 +16,7 @@ describe 'WSON with DomXPathConnector', ->
   before ->
     document = jsdom.jsdom '<body><div></div></body>'
     window = document.defaultView
-    testedWSON = new WSON connectors: DomXPathConnector.forAllDomInterfaces(window, document)
+    testedWSON = new WSON connectors: connectors window, document
 
   describe '.stringify', ->
     it 'should serialize an element', ->
@@ -33,8 +33,6 @@ describe 'WSON with DomXPathConnector', ->
         serialized = testedWSON.stringify document.body.firstChild
         anotherDocument = jsdom.jsdom document.body.outerHTML
         anotherWindow = anotherDocument.defaultView
-        anotherWSON = new WSON connectors: {
-          'HTMLDivElement': DomXPathConnector(anotherWindow.HTMLDivElement, anotherDocument),
-        }
+        anotherWSON = new WSON connectors: connectors anotherWindow, anotherDocument
         anotherWSON.parse(serialized).should.be.exactly anotherDocument.body.firstChild
 

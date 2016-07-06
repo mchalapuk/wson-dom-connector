@@ -3,8 +3,7 @@
 
 var xpathPosition = require('simple-xpath-position');
 
-module.exports = DomXPathConnector;
-module.exports.forAllDomInterfaces = forAllDomInterfaces;
+module.exports = forAllDomInterfaces;
 
 function DomXPathConnector(NodeConstructor, documentNode) {
   function xPathFromNode(node) {

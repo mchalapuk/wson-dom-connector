@@ -5,7 +5,7 @@ jsdom = require 'jsdom'
 _ = require 'underscore'
 
 delete require.cache[ require.resolve '../' ]
-DomXPathConnector = require '../'
+connectors = require '../'
 
 describe 'DomXPathConnector', ->
   document = null
@@ -13,7 +13,7 @@ describe 'DomXPathConnector', ->
 
   before ->
     document = jsdom.jsdom '<body><div></div></body>'
-    testedConnector = DomXPathConnector document.defaultView.Node, document
+    testedConnector = connectors(document.defaultView, document).Node
 
   describe '.by', ->
 
