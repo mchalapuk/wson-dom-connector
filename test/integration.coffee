@@ -1,6 +1,5 @@
 should = require 'should'
 mocha = require 'mocha'
-_ = require 'underscore'
 
 jsdom = require 'jsdom'
 WSON = require 'wson'
