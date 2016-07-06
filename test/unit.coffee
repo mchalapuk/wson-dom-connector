@@ -6,21 +6,14 @@ jsdom = require 'jsdom'
 delete require.cache[ require.resolve '../' ]
 connectors = require '../'
 
-document = null
-window = null
-
-before ->
-  document = jsdom.jsdom()
-  window = document.defaultView
-after ->
-  window.close()
-
-getBody = (doc)-> doc.body
-getDocument = (doc)-> doc
+getBody = (win)-> win.document.body
+getDocument = (win)-> win.document
+getWindow = (win)-> win
 
 testParams = [
   [ 'HTMLBodyElement', getBody, [ '/html[1]/body[1]' ] ]
   [ 'Document', getDocument, [] ]
+  [ 'Window', getWindow, [] ]
 ]
 
 for params in testParams
@@ -28,10 +21,15 @@ for params in testParams
     [ name, getTestedNode, expectedSplit ] = params
 
     describe "connector.#{name}", ->
+      window = null
+
       testedConnector = null
 
       before ->
-        testedConnector = connectors(window, document)[name]
+        window = jsdom.jsdom().defaultView
+        testedConnector = connectors(window, window.document)[name]
+      after ->
+        window.close()
 
       describe ".by", ->
         it "should be #{name}'s constructor", ->
@@ -39,18 +37,19 @@ for params in testParams
 
       describe ".split", ->
         it "should throw when called with node from another document", ->
-          anotherDocument = jsdom.jsdom()
-          should(-> testedConnector.split getTestedNode anotherDocument)
+          anotherWindow = jsdom.jsdom().defaultView
+          should(-> testedConnector.split getTestedNode anotherWindow)
             .throw 'The supplied node is not contained by the root node.'
 
         it "should return proper xpath of #{name}", ->
-          node = getTestedNode document
+          node = getTestedNode window
           actualSplit = testedConnector.split node
           actualSplit.should.be.eql expectedSplit
 
       describe ".create", ->
         it "should return the same node from which xpath was created", ->
-          node = getTestedNode document
-          xpath = testedConnector.split node
-          testedConnector.create(xpath).should.be.exactly node
+          node = getTestedNode window
+          splitted = testedConnector.split node
+          created = testedConnector.create splitted
+          (created is node).should.be.true
 

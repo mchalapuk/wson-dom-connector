@@ -20,18 +20,21 @@ function XPathConnector(NodeConstructor, documentNode) {
   };
 }
 
-function SingletonConnector(NodeConstructor, getter) {
-  function checkSameDocument(node) {
-    if (node !== getter()) {
+function SingletonConnector(NodeConstructor, instance) {
+  function checkSameInstance(node) {
+    if (node !== instance) {
       throw new Error('The supplied node is not contained by the root node.');
     }
     return [];
   }
+  function getInstance() {
+    return instance;
+  }
 
   return {
     by: NodeConstructor,
-    split: checkSameDocument,
-    create: getter
+    split: checkSameInstance,
+    create: getInstance
   }
 }
 
@@ -87,9 +90,9 @@ function forAllDomInterfaces(window, document) {
     }
     connectors[name] = new XPathConnector(window[name], document);
   });
-  connectors.Window = new SingletonConnector(window.Window, function() { return window; });
-  connectors.Document = new SingletonConnector(window.Document, function() { return document; });
-  connectors.XMLDocument = new SingletonConnector(window.XMLDocument, function() { return document; });
+  connectors.Window = new SingletonConnector(window.Window, window);
+  connectors.Document = new SingletonConnector(window.Document, document);
+  connectors.XMLDocument = new SingletonConnector(window.XMLDocument, document);
   return connectors;
 }
 

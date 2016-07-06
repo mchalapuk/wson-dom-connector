@@ -7,33 +7,35 @@ WSON = require 'wson'
 delete require.cache[ require.resolve '../' ]
 connectors = require '../'
 
-document = null
-window = null
-testedWSON = null
+getBodysFirstChild = (win)-> win.document.body.firstChild
+getDocument = (win)-> win.document
+getWindow = (win)-> win
 
-before ->
-  document = jsdom.jsdom '<body><div>'
-  window = document.defaultView
-  testedWSON = new WSON connectors: connectors window, document
-after ->
-  window.close()
-
-getBodysFirstChild = (doc)-> doc.body.firstChild
-getDocument = (doc)-> doc
+pageHtml = '<body><div>'
 
 testParams = [
   [ 'HTMLDivElement', getBodysFirstChild, '[:HTMLDivElement|/html`a1`e/body`a1`e/div`a1`e]' ]
   [ 'Document', getDocument, '[:Document]' ]
+  [ 'Window', getWindow, '[:Window]' ]
 ]
 
 describe "WSON with all connectors", ->
+  window = null
+  testedWSON = null
+
+  before ->
+    window = jsdom.jsdom(pageHtml).defaultView
+    testedWSON = new WSON connectors: connectors window, window.document
+  after ->
+    window.close()
+
   describe ".stringify", ->
     for params in testParams
       do (params)->
         [name, getTestedNode, expectedString] = params
 
         it "should serialize a #{name} to #{expectedString}", ->
-          node = getTestedNode document
+          node = getTestedNode window
           serialized = testedWSON.stringify node
           serialized.should.equal expectedString
 
@@ -43,18 +45,17 @@ describe "WSON with all connectors", ->
         [name, getTestedNode, expectedString] = params
 
         it "should return the same instance of #{name} as was passed to .stringify", ->
-          node = getTestedNode document
+          node = getTestedNode window
           serialized = testedWSON.stringify node
           deserialized = testedWSON.parse serialized
-          deserialized.should.be.exactly node
+          (deserialized is node).should.be.true
 
         it "should parse #{name} from another document", ->
-          node = getTestedNode document
+          node = getTestedNode window
           serialized = testedWSON.stringify node
-          anotherDocument = jsdom.jsdom document.body.outerHTML
-          anotherWindow = anotherDocument.defaultView
-          anotherWSON = new WSON connectors: connectors anotherWindow, anotherDocument
-          anotherNode = getTestedNode anotherDocument
+          anotherWindow = jsdom.jsdom(pageHtml).defaultView
+          anotherWSON = new WSON connectors: connectors anotherWindow, anotherWindow.document
+          anotherNode = getTestedNode anotherWindow
           deserialized = anotherWSON.parse serialized
-          deserialized.should.be.exactly anotherNode
+          (deserialized is anotherNode).should.be.true
 
