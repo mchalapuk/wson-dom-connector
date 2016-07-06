@@ -49,10 +49,10 @@ wson-dom-conector can be used in a web browser via [browserify][browserify]...
 
 ```javascript
 var WSON = require("wson");
-var connectors = require("wson-dom-connector");
+var domConnectors = require("wson-dom-connector");
 
 var wson = new WSON({
-  connectors: domConnector(window, document)
+  connectors: domConnectors(window, document)
   });
 
 console.log(wson.stringify(document.body));
@@ -67,13 +67,13 @@ console.log(wson.stringify(document.body));
 
 ```javascript
 var WSON = require("wson");
-var connectors = require("wson-dom-connector");
+var domConnectors = require("wson-dom-connector");
 var jsdom = require("jsdom");
 
 var document = jsdom.jsdom("<body></body>")
 
 var wson = new WSON({
-  connectors: connectors(document.defaultView, document)
+  connectors: domConnectors(document.defaultView, document)
   });
 
 console.log(wson.stringify(document.body));
