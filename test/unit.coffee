@@ -6,38 +6,51 @@ jsdom = require 'jsdom'
 delete require.cache[ require.resolve '../' ]
 connectors = require '../'
 
-describe 'connector.HTMLBodyElement', ->
-  document = null
-  window = null
+document = null
+window = null
 
-  testedConnector = null
+before ->
+  document = jsdom.jsdom()
+  window = document.defaultView
+after ->
+  window.close()
 
-  before ->
-    document = jsdom.jsdom()
-    window = document.defaultView
-    testedConnector = connectors(window, document).HTMLBodyElement
-  after ->
-    window.close()
+getBody = (doc)-> doc.body
+getDocument = (doc)-> doc
 
-  describe '.by', ->
+testParams = [
+  [ 'HTMLBodyElement', getBody, [ '/html[1]/body[1]' ] ]
+  [ 'Document', getDocument, [] ]
+]
 
-    it 'should be node\'s constructor', ->
-      testedConnector.by.should.be.exactly window.HTMLBodyElement
+for params in testParams
+  do (params)->
+    [ name, getTestedNode, expectedSplit ] = params
 
-  describe '.split', ->
+    describe "connector.#{name}", ->
+      testedConnector = null
 
-    it 'should throw when called with node from another document', ->
-      anotherDocument = jsdom.jsdom()
+      before ->
+        testedConnector = connectors(window, document)[name]
 
-      should(-> testedConnector.split anotherDocument.body)
-        .throw 'The supplied node is not contained by the root node.'
+      describe ".by", ->
+        it "should be #{name}'s constructor", ->
+          testedConnector.by.should.be.exactly window[name]
 
-    it 'should return proper xpath of document\'s body', ->
-      testedConnector.split(document.body).should.be.eql [ '/html[1]/body[1]' ]
+      describe ".split", ->
+        it "should throw when called with node from another document", ->
+          anotherDocument = jsdom.jsdom()
+          should(-> testedConnector.split getTestedNode anotherDocument)
+            .throw 'The supplied node is not contained by the root node.'
 
-  describe '.create', ->
+        it "should return proper xpath of #{name}", ->
+          node = getTestedNode document
+          actualSplit = testedConnector.split node
+          actualSplit.should.be.eql expectedSplit
 
-    it 'should return the same node from which xpath was created', ->
-      xpath = testedConnector.split document.body
-      testedConnector.create(xpath).should.be.exactly document.body
+      describe ".create", ->
+        it "should return the same node from which xpath was created", ->
+          node = getTestedNode document
+          xpath = testedConnector.split node
+          testedConnector.create(xpath).should.be.exactly node
 
