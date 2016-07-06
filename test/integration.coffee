@@ -16,9 +16,7 @@ describe 'WSON with DomXPathConnector', ->
   before ->
     document = jsdom.jsdom '<body><div></div></body>'
     window = document.defaultView
-    testedWSON = new WSON connectors: {
-        'HTMLDivElement': DomXPathConnector(window.HTMLDivElement, document),
-      }
+    testedWSON = new WSON connectors: DomXPathConnector.forAllDomInterfaces(window, document)
 
   describe '.stringify', ->
     it 'should serialize an element', ->
