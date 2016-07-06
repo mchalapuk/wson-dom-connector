@@ -6,7 +6,7 @@ node_js:
   - "0.10"
 before_script:
   - npm install -g mocha-cli
-  - npm install
+  - npm install --no-optional
 script:
   - npm test
 
