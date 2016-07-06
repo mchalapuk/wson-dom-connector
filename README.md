@@ -1,5 +1,5 @@
 [npm-url]: https://npmjs.org/package/wson-dom-connector
-[npm-image]: https://img.shields.io/npm/v/wson-dom-connector.svg?maxAge=2592000
+[npm-image]: https://img.shields.io/npm/v/wson-dom-connector.svg?maxAge=1
 
 [travis-url]: http://travis-ci.org/webfront-toolkit/wson-dom-connector
 [travis-image]: https://api.travis-ci.org/webfront-toolkit/wson-dom-connector.svg
