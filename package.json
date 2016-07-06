@@ -1,0 +1,39 @@
+{
+  "name": "wson-dom-connector",
+  "version": "0.1.0",
+  "description": "Serialize DOM nodes to xPaths with wson.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webfront-toolkit/wson-dom-connector.git"
+  },
+  "keywords": [
+    "dom",
+    "wson",
+    "serialize",
+    "xpath",
+    "browser",
+    "node"
+  ],
+  "author": "Maciej Chałapuk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/webfront-toolkit/wson-dom-connector/issues"
+  },
+  "homepage": "https://github.com/webfront-toolkit/wson-dom-connector",
+  "devDependencies": {
+    "coffee-script": "~1.10.0",
+    "jsdom": "^9.4.0",
+    "mocha": "*",
+    "should": "~9.0.2",
+    "underscore": "^1.8.3",
+    "wson": "webfront-toolkit/wson"
+  },
+  "dependencies": {
+    "simple-xpath-position": "webfront-toolkit/simple-xpath-position"
+  }
+}
+
