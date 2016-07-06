@@ -7,7 +7,7 @@ WSON = require 'wson'
 delete require.cache[ require.resolve '../' ]
 connectors = require '../'
 
-describe 'WSON with DomXPathConnector', ->
+describe 'WSON with all connectors', ->
   document = null
   window = null
   testedWSON = null
@@ -16,6 +16,8 @@ describe 'WSON with DomXPathConnector', ->
     document = jsdom.jsdom '<body><div></div></body>'
     window = document.defaultView
     testedWSON = new WSON connectors: connectors window, document
+  after ->
+    window.close()
 
   describe '.stringify', ->
     it 'should serialize an element', ->
@@ -27,11 +29,10 @@ describe 'WSON with DomXPathConnector', ->
       serialized = testedWSON.stringify document.body.firstChild
       testedWSON.parse(serialized).should.be.exactly document.body.firstChild
 
-    describe 'when called on WSON with connector from another HTML document', ->
-      it 'should return element of xpath relative to this document', ->
-        serialized = testedWSON.stringify document.body.firstChild
-        anotherDocument = jsdom.jsdom document.body.outerHTML
-        anotherWindow = anotherDocument.defaultView
-        anotherWSON = new WSON connectors: connectors anotherWindow, anotherDocument
-        anotherWSON.parse(serialized).should.be.exactly anotherDocument.body.firstChild
+    it 'should parse element from another document', ->
+      serialized = testedWSON.stringify document.body.firstChild
+      anotherDocument = jsdom.jsdom document.body.outerHTML
+      anotherWindow = anotherDocument.defaultView
+      anotherWSON = new WSON connectors: connectors anotherWindow, anotherDocument
+      anotherWSON.parse(serialized).should.be.exactly anotherDocument.body.firstChild
 
