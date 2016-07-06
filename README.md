@@ -2,7 +2,7 @@
 [npm-image]: https://img.shields.io/npm/v/wson-dom-connector.svg?maxAge=2592000
 
 [travis-url]: http://travis-ci.org/webfront-toolkit/wson-dom-connector
-[travis-image]: https://img.shields.io/travis/webfront-toolkit/wson-dom-connector.svg?maxAge=2592000
+[travis-image]: https://api.travis-ci.org/webfront-toolkit/wson-dom-connector.svg
 
 [david-url]: https://david-dm.org/webfront-toolkit/wson-dom-connector
 [david-image]: https://david-dm.org/webfront-toolkit/wson-dom-connector.svg
