@@ -38,5 +38,3 @@ describe 'WSON with DomXPathConnector', ->
         }
         anotherWSON.parse(serialized).should.be.exactly anotherDocument.body.firstChild
 
-
-
