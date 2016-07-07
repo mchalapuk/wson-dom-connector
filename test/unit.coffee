@@ -25,10 +25,10 @@ for params in testParams
 
       testedConnector = null
 
-      before ->
+      beforeEach ->
         window = jsdom.jsdom().defaultView
         testedConnector = connectors(window, window.document)[name]
-      after ->
+      afterEach ->
         window.close()
 
       describe ".by", ->

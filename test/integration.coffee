@@ -23,10 +23,10 @@ describe "WSON with all connectors", ->
   window = null
   testedWSON = null
 
-  before ->
+  beforeEach ->
     window = jsdom.jsdom(pageHtml).defaultView
     testedWSON = new WSON connectors: connectors window, window.document
-  after ->
+  afterEach ->
     window.close()
 
   describe ".stringify", ->
