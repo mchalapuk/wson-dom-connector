@@ -83,12 +83,17 @@ var XPathableDomInterfaces = [
 ];
 
 function forAllDomInterfaces(window) {
-  checkNotNull(window, 'window');
-  var document = checkNotNull(window.document, 'window.document');
+  check(window, 'window')
+    .isNotEmpty()
+    .isOfType(window.Window, 'window.Window');
+  var document = check(window.document, 'window.document')
+    .isNotEmpty()
+    .isOfType(window.Document, 'window.Document')
+    .value;
 
   var connectors = {};
   XPathableDomInterfaces.forEach(function(name) {
-    if (typeof window[name] === 'undefined') {
+    if (typeof window[name] !== 'function') {
       return;
     }
     connectors[name] = new XPathConnector(window[name], document);
@@ -99,10 +104,36 @@ function forAllDomInterfaces(window) {
   return connectors;
 }
 
-function checkNotNull(value, name) {
-  if (!value) {
-    throw new Error(name +' is required');
-  }
-  return value;
+function check(value, name) {
+  var that = {};
+  that.value = value;
+  that.name = name;
+  that.__proto__ = check.prototype;
+  return that;
 }
+
+check.prototype = {
+  isNotEmpty: function() {
+    if (!this.value) {
+      throw new Error(this.name +' is required');
+    }
+    return this;
+  },
+  isFunction: function() {
+    if (typeof this.value !== 'function') {
+      throw new Error(this.name +' must be a function');
+    }
+    return this;
+  },
+  isOfType: function(constructor, typeName) {
+    check(constructor, typeName)
+      .isNotEmpty()
+      .isFunction();
+
+    if (this.value.constructor !== constructor) {
+      throw new Error(this.name +' must be of type '+ typeName);
+    }
+    return this;
+  },
+};
 
