@@ -52,7 +52,7 @@ var WSON = require("wson");
 var domConnectors = require("wson-dom-connector");
 
 var wson = new WSON({
-  connectors: domConnectors(window, document)
+  connectors: domConnectors(window)
   });
 
 console.log(wson.stringify(document.body));
@@ -73,7 +73,7 @@ var jsdom = require("jsdom");
 var document = jsdom.jsdom("<body></body>")
 
 var wson = new WSON({
-  connectors: domConnectors(document.defaultView, document)
+  connectors: domConnectors(document.defaultView)
   });
 
 console.log(wson.stringify(document.body));

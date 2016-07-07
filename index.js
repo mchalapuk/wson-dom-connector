@@ -82,9 +82,9 @@ var XPathableDomInterfaces = [
   'SVGVKernElement',
 ];
 
-function forAllDomInterfaces(window, document) {
-  checkRequiredArgument(window, 'window');
-  checkRequiredArgument(document, 'document');
+function forAllDomInterfaces(window) {
+  checkNotNull(window, 'window');
+  var document = checkNotNull(window.document, 'window.document');
 
   var connectors = {};
   XPathableDomInterfaces.forEach(function(name) {
@@ -99,7 +99,7 @@ function forAllDomInterfaces(window, document) {
   return connectors;
 }
 
-function checkRequiredArgument(value, name) {
+function checkNotNull(value, name) {
   if (!value) {
     throw new Error(name +' is required');
   }
