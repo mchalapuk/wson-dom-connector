@@ -83,6 +83,9 @@ var XPathableDomInterfaces = [
 ];
 
 function forAllDomInterfaces(window, document) {
+  checkRequiredArgument(window, 'window');
+  checkRequiredArgument(document, 'document');
+
   var connectors = {};
   XPathableDomInterfaces.forEach(function(name) {
     if (typeof window[name] === 'undefined') {
@@ -94,5 +97,12 @@ function forAllDomInterfaces(window, document) {
   connectors.Document = new SingletonConnector(window.Document, document);
   connectors.XMLDocument = new SingletonConnector(window.XMLDocument, document);
   return connectors;
+}
+
+function checkRequiredArgument(value, name) {
+  if (!value) {
+    throw new Error(name +' is required');
+  }
+  return value;
 }
 
