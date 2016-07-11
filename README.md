@@ -1,6 +1,3 @@
-[npm-url]: https://npmjs.org/package/wson-dom-connector
-[npm-image]: https://img.shields.io/npm/v/wson-dom-connector.svg?maxAge=1
-
 [travis-url]: http://travis-ci.org/webfront-toolkit/wson-dom-connector
 [travis-image]: https://api.travis-ci.org/webfront-toolkit/wson-dom-connector.svg
 
@@ -10,16 +7,15 @@
 [david-url-dev]: https://david-dm.org/webfront-toolkit/wson-dom-connector#info=devDependencies
 [david-image-dev]: https://david-dm.org/webfront-toolkit/wson-dom-connector/dev-status.svg
 
-[license-url]: LICENSE
-[license-image]: https://img.shields.io/github/license/webfront-toolkit/wson-dom-connector.svg?maxAge=2592000
+[npm-url]: https://npmjs.org/package/wson-dom-connector
+[npm-image]: https://badge.fury.io/js/wson-dom-connector.svg
 
 # wson-dom-connector
 
-[![NPM version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
 [![Dependency Status][david-image]][david-url]
 [![devDependency Status][david-image-dev]][david-url-dev]
-[![License][license-image]][license-url]
+[![NPM version][npm-image]][npm-url]
 
 [WSON][wson] is a human-readable data-interchange format with support for cyclic
 structures. This module is an extension to wson that enables serializing
