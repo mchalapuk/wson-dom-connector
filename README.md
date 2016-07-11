@@ -29,7 +29,9 @@ nodes.
 **Possible Use Cases**
 
  1. Store references to DOM elements between page reloads,
- 2. Record DOM events to later simulate a user during automated test.
+ 2. Record DOM events to later simulate a user during automated test (needs [**`wson-event-connector`**][wson-event-connector]).
+
+[wson-event-connector]: https://github.com/webfront-toolkit/wson-event-connector
 
 ## Installation
 
