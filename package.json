@@ -32,6 +32,6 @@
     "wson": "^1.10.0"
   },
   "dependencies": {
-    "simple-xpath-position": "webfront-toolkit/simple-xpath-position"
+    "simple-xpath-position": "^2.0.0"
   }
 }
