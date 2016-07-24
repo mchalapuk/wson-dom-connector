@@ -2,6 +2,7 @@
 'use strict';
 
 var xpathPosition = require('simple-xpath-position');
+var check = require('offensive');
 
 module.exports = forAllDomInterfaces;
 
@@ -83,13 +84,15 @@ var XPathableDomInterfaces = [
 ];
 
 function forAllDomInterfaces(window) {
-  check(window, 'window')
-    .isNotEmpty()
-    .isOfType(window.Window, 'window.Window');
+  check(window, 'window').is.not.Empty();
+  check(window.Window, 'window.Window').is.aFunction();
+  check(window.Document, 'window.Document').is.aFunction();
+  // TODO change to .anInstanceOf check after fixing this in jsdom
+  if (window.constructor !== window.Window) {
+    throw new Error('window must be an instance of Window; got [object Object]');
+  }
   var document = check(window.document, 'window.document')
-    .isNotEmpty()
-    .isOfType(window.Document, 'window.Document')
-    .value;
+    .is.not.Empty.and.is.anInstanceOf(window.Document)._value;
 
   var connectors = {};
   XPathableDomInterfaces.forEach(function(name) {
@@ -104,36 +107,4 @@ function forAllDomInterfaces(window) {
   return connectors;
 }
 
-function check(value, name) {
-  var that = {};
-  that.value = value;
-  that.name = name;
-  that.__proto__ = check.prototype;
-  return that;
-}
-
-check.prototype = {
-  isNotEmpty: function() {
-    if (!this.value) {
-      throw new Error(this.name +' is required');
-    }
-    return this;
-  },
-  isFunction: function() {
-    if (typeof this.value !== 'function') {
-      throw new Error(this.name +' must be a function');
-    }
-    return this;
-  },
-  isOfType: function(constructor, typeName) {
-    check(constructor, typeName)
-      .isNotEmpty()
-      .isFunction();
-
-    if (this.value.constructor !== constructor) {
-      throw new Error(this.name +' must be of type '+ typeName);
-    }
-    return this;
-  },
-};
 
