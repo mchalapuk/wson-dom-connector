@@ -7,6 +7,7 @@ WSON = require 'wson'
 delete require.cache[ require.resolve '../' ]
 connectors = require '../'
 
+getDocumentElement = (win)-> win.document.documentElement
 getBodysFirstChild = (win)-> win.document.body.firstChild
 getDocument = (win)-> win.document
 getWindow = (win)-> win
@@ -14,7 +15,8 @@ getWindow = (win)-> win
 pageHtml = '<body><div>'
 
 testParams = [
-  [ 'HTMLDivElement', getBodysFirstChild, '[:HTMLDivElement|/html`a1`e/body`a1`e/div`a1`e]' ]
+  [ 'HTMLHtmlElement', getDocumentElement, '[:HTMLHtmlElement|#]' ]
+  [ 'HTMLDivElement', getBodysFirstChild, '[:HTMLDivElement|/body`a1`e/div`a1`e]' ]
   [ 'Document', getDocument, '[:Document]' ]
   [ 'Window', getWindow, '[:Window]' ]
 ]

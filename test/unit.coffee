@@ -6,12 +6,14 @@ jsdom = require 'jsdom'
 delete require.cache[ require.resolve '../' ]
 connectors = require '../'
 
+getHtml = (win)-> win.document.documentElement
 getBody = (win)-> win.document.body
 getDocument = (win)-> win.document
 getWindow = (win)-> win
 
 testParams = [
-  [ 'HTMLBodyElement', getBody, [ '/html[1]/body[1]' ] ]
+  [ 'HTMLHtmlElement', getHtml, [ '' ] ]
+  [ 'HTMLBodyElement', getBody, [ '/body[1]' ] ]
   [ 'Document', getDocument, [] ]
   [ 'Window', getWindow, [] ]
 ]

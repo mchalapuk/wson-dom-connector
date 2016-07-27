@@ -8,10 +8,10 @@ module.exports = forAllDomInterfaces;
 
 function XPathConnector(NodeConstructor, documentNode) {
   function xPathFromNode(node) {
-    return [ xpathPosition.fromNode(node, documentNode) ];
+    return [ xpathPosition.fromNode(node, documentNode.documentElement) ];
   }
   function nodeFromXPath(xpath) {
-    return xpathPosition.toNode(xpath[0], documentNode);
+    return xpathPosition.toNode(xpath[0], documentNode.documentElement);
   }
 
   return {
