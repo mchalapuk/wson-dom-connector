@@ -104,6 +104,7 @@ function forAllDomInterfaces(window) {
   connectors.Window = new SingletonConnector(window.Window, window);
   connectors.Document = new SingletonConnector(window.Document, document);
   connectors.XMLDocument = new SingletonConnector(window.XMLDocument, document);
+  connectors.HTMLDocument = new SingletonConnector(window.HTMLDocument, document);
   return connectors;
 }
 
