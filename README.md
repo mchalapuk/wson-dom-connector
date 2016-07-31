@@ -55,7 +55,7 @@ var wson = new WSON({
   });
 
 console.log(wson.stringify(document.body));
-// [:HTMLBodyElement|/html`a1`e/body`a1`e]
+// [:HTMLBodyElement|/body`a1`e]
 ```
 
 ...or in [node][node] with any standard-compliant DOM implementation
@@ -76,7 +76,7 @@ var wson = new WSON({
   });
 
 console.log(wson.stringify(document.body));
-// [:HTMLBodyElement|/html`a1`e/body`a1`e]
+// [:HTMLBodyElement|/body`a1`e]
 ```
 
 ## API
