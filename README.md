@@ -4,7 +4,7 @@
 [david-url]: https://david-dm.org/webfront-toolkit/wson-dom-connector
 [david-image]: https://david-dm.org/webfront-toolkit/wson-dom-connector.svg
 
-[david-url-dev]: https://david-dm.org/webfront-toolkit/wson-dom-connector#info=devDependencies
+[david-url-dev]: https://david-dm.org/webfront-toolkit/wson-dom-connector?type=dev
 [david-image-dev]: https://david-dm.org/webfront-toolkit/wson-dom-connector/dev-status.svg
 
 [npm-url]: https://npmjs.org/package/wson-dom-connector
@@ -47,7 +47,7 @@ wson-dom-conector can be used in a web browser via [browserify][browserify]...
 [browserify]: https://github.com/substack/node-browserify
 
 ```javascript
-var WSON = require("wson");
+var WSON = require("wson").Wson;
 var domConnectors = require("wson-dom-connector");
 
 var wson = new WSON({
@@ -65,7 +65,7 @@ console.log(wson.stringify(document.body));
 [jsdom]: https://github.com/tmpvar/jsdom
 
 ```javascript
-var WSON = require("wson");
+var WSON = require("wson").Wson;
 var domConnectors = require("wson-dom-connector");
 var jsdom = require("jsdom");
 
@@ -86,3 +86,4 @@ Please refer to [wson's documentation][wson] for further details.
 
 Copyright &copy; 2016 Maciej Chałapuk.
 Released under [MIT license](LICENSE).
+

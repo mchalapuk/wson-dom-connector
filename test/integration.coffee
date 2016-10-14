@@ -2,7 +2,7 @@ should = require 'should'
 mocha = require 'mocha'
 
 jsdom = require 'jsdom'
-WSON = require 'wson'
+WSON = (require 'wson').Wson
 
 delete require.cache[ require.resolve '../' ]
 connectors = require '../'
