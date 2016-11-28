@@ -1,11 +1,11 @@
-[travis-url]: http://travis-ci.org/webfront-toolkit/wson-dom-connector
-[travis-image]: https://api.travis-ci.org/webfront-toolkit/wson-dom-connector.svg
+[travis-url]: http://travis-ci.org/muroc/wson-dom-connector
+[travis-image]: https://api.travis-ci.org/muroc/wson-dom-connector.svg
 
-[david-url]: https://david-dm.org/webfront-toolkit/wson-dom-connector
-[david-image]: https://david-dm.org/webfront-toolkit/wson-dom-connector.svg
+[david-url]: https://david-dm.org/muroc/wson-dom-connector
+[david-image]: https://david-dm.org/muroc/wson-dom-connector.svg
 
-[david-url-dev]: https://david-dm.org/webfront-toolkit/wson-dom-connector?type=dev
-[david-image-dev]: https://david-dm.org/webfront-toolkit/wson-dom-connector/dev-status.svg
+[david-url-dev]: https://david-dm.org/muroc/wson-dom-connector?type=dev
+[david-image-dev]: https://david-dm.org/muroc/wson-dom-connector/dev-status.svg
 
 [npm-url]: https://npmjs.org/package/wson-dom-connector
 [npm-image]: https://badge.fury.io/js/wson-dom-connector.svg
@@ -32,7 +32,7 @@ nodes.
  2. Record DOM events to later simulate a user during automated test
     (needs [`wson-event-connector`][wson-event-connector]).
 
-[wson-event-connector]: https://github.com/webfront-toolkit/wson-event-connector
+[wson-event-connector]: https://github.com/muroc/wson-event-connector
 
 ## Installation
 
