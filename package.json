@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/webfront-toolkit/wson-dom-connector.git"
+    "url": "git+https://github.com/mchalapuk/wson-dom-connector.git"
   },
   "keywords": [
     "dom",
@@ -22,9 +22,9 @@
   "author": "Maciej Chałapuk",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/webfront-toolkit/wson-dom-connector/issues"
+    "url": "https://github.com/mchalapuk/wson-dom-connector/issues"
   },
-  "homepage": "https://github.com/webfront-toolkit/wson-dom-connector",
+  "homepage": "https://github.com/mchalapuk/wson-dom-connector",
   "devDependencies": {
     "coffee-script": "^1.12.7",
     "jsdom": "^15.0.0",
