@@ -84,6 +84,6 @@ Please refer to [wson's documentation][wson] for further details.
 
 ## License
 
-Copyright &copy; 2016 - 2017 Maciej Chałapuk.
+Copyright &copy; 2016 - 2019 Maciej Chałapuk.
 Released under [MIT license](LICENSE).
 
