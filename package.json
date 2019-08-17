@@ -25,14 +25,14 @@
   },
   "homepage": "https://github.com/webfront-toolkit/wson-dom-connector",
   "devDependencies": {
-    "coffee-script": "~1.11.1",
-    "jsdom": "^9.4.0",
+    "coffee-script": "^1.12.7",
+    "jsdom": "^15.0.0",
     "mocha": "*",
-    "should": "^11.1.1",
+    "should": "^11.2.1",
     "wson": "^2.0.0"
   },
   "dependencies": {
-    "offensive": "^0.7.0",
+    "offensive": "^2.1.5",
     "simple-xpath-position": "^2.0.0"
   }
 }

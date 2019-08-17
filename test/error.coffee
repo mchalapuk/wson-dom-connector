@@ -23,17 +23,19 @@ class Window
     str += "... }"
     str
 
-class UnknownType extends Window
+class UnknownType
+  Window: Window
+  Document: Document
 
 testParams = [
-  [ undefined, 'window must be not empty; got undefined' ]
-  [ new Window().without('document'), 'window.document must be not empty; got undefined' ]
-  [ new Window().without('Window'), 'window.Window must be a function; got undefined' ]
-  [ new Window().without('Document'), 'window.Document must be a function; got undefined' ]
-  [ new Window().with('Window', {}), 'window.Window must be a function; got [object Object]' ]
-  [ new Window().with('Document', {}), 'window.Document must be a function; got [object Object]' ]
-  [ new UnknownType(), 'window must be an instance of Window; got [object Object]' ]
-  [ new Window().with('document', {}), 'window.document must be an instance of Document; got [object Object]' ]
+  [ undefined, 'window must not be null or undefined (got undefined)' ]
+  [ new Window().without('document'), 'window.document must be an instance of Document (got undefined)' ]
+  [ new Window().without('Window'), 'window.Window must be a function (got undefined)' ]
+  [ new Window().without('Document'), 'window.Document must be a function (got undefined)' ]
+  [ new Window().with('Window', {}), 'window.Window must be a function (got {})' ]
+  [ new Window().with('Document', {}), 'window.Document must be a function (got {})' ]
+  [ new UnknownType(), 'window must be an instance of Window (got {})' ]
+  [ new Window().with('document', {}), 'window.document must be an instance of Document (got {})' ]
 ]
 
 describe "wson-dom-connector called with illegal argument", ->

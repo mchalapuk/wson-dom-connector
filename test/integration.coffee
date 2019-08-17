@@ -26,7 +26,7 @@ describe "WSON with all connectors", ->
   testedWSON = null
 
   beforeEach ->
-    window = jsdom.jsdom(pageHtml).defaultView
+    window = new jsdom.JSDOM(pageHtml).window
     testedWSON = new WSON connectors: connectors window
   afterEach ->
     window.close()
@@ -55,7 +55,7 @@ describe "WSON with all connectors", ->
         it "should parse #{name} from another document", ->
           node = getTestedNode window
           serialized = testedWSON.stringify node
-          anotherWindow = jsdom.jsdom(pageHtml).defaultView
+          anotherWindow = new jsdom.JSDOM(pageHtml).window
           anotherWSON = new WSON connectors: connectors anotherWindow
           anotherNode = getTestedNode anotherWindow
           deserialized = anotherWSON.parse serialized

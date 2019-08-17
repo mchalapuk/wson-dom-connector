@@ -2,7 +2,12 @@
 'use strict';
 
 var xpathPosition = require('simple-xpath-position');
-var check = require('offensive');
+
+var check = require('offensive').default;
+require('offensive/assertions/Empty/register');
+require('offensive/assertions/aFunction/register');
+require('offensive/assertions/anInstanceOf/register');
+require('offensive/assertions/exactly/register');
 
 module.exports = forAllDomInterfaces;
 
@@ -87,12 +92,9 @@ function forAllDomInterfaces(window) {
   check(window, 'window').is.not.Empty();
   check(window.Window, 'window.Window').is.aFunction();
   check(window.Document, 'window.Document').is.aFunction();
-  // TODO change to .anInstanceOf check after fixing this in jsdom
-  if (window.constructor !== window.Window) {
-    throw new Error('window must be an instance of Window; got [object Object]');
-  }
+  check(window, 'window').is.anInstanceOf(window.Window)();
   var document = check(window.document, 'window.document')
-    .is.not.Empty.and.is.anInstanceOf(window.Document)._value;
+    .is.anInstanceOf(window.Document)();
 
   var connectors = {};
   XPathableDomInterfaces.forEach(function(name) {

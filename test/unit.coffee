@@ -28,7 +28,7 @@ for params in testParams
       testedConnector = null
 
       beforeEach ->
-        window = jsdom.jsdom().defaultView
+        window = new jsdom.JSDOM().window
         testedConnector = connectors(window, window.document)[name]
       afterEach ->
         window.close()
@@ -39,7 +39,7 @@ for params in testParams
 
       describe ".split", ->
         it "should throw when called with node from another document", ->
-          anotherWindow = jsdom.jsdom().defaultView
+          anotherWindow = new jsdom.JSDOM().window
           should(-> testedConnector.split getTestedNode anotherWindow)
             .throw 'The supplied node is not contained by the root node.'
 
