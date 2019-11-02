@@ -33,7 +33,7 @@
     "wson": "^2.0.0"
   },
   "dependencies": {
-    "offensive": "^2.1.33",
+    "offensive": "^2.1.34",
     "simple-xpath-position": "^2.0.0"
   }
 }
