@@ -27,13 +27,13 @@
   "homepage": "https://github.com/mchalapuk/wson-dom-connector",
   "devDependencies": {
     "coffee-script": "^1.12.7",
-    "jsdom": "^16.2.2",
+    "jsdom": "^16.3.0",
     "mocha": "^8.0.1",
     "should": "^13.2.3",
     "wson": "^2.0.0"
   },
   "dependencies": {
-    "offensive": "^2.6.16",
+    "offensive": "^2.6.17",
     "simple-xpath-position": "^2.0.0"
   }
 }
