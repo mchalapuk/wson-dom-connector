@@ -28,12 +28,12 @@
   "devDependencies": {
     "coffee-script": "^1.12.7",
     "jsdom": "^16.3.0",
-    "mocha": "^8.1.0",
+    "mocha": "^8.1.1",
     "should": "^13.2.3",
     "wson": "^2.0.0"
   },
   "dependencies": {
-    "offensive": "^2.6.25",
+    "offensive": "^2.7.1",
     "simple-xpath-position": "^2.0.0"
   }
 }
