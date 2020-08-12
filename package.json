@@ -1,6 +1,6 @@
 {
   "name": "wson-dom-connector",
-  "version": "0.7.123",
+  "version": "0.7.124",
   "description": "Serialize DOM nodes to xPaths with wson.",
   "main": "index.js",
   "scripts": {
