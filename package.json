@@ -30,7 +30,7 @@
     "jsdom": "^16.4.0",
     "mocha": "^8.1.1",
     "should": "^13.2.3",
-    "wson": "^2.0.0"
+    "wson": "^2.7.1"
   },
   "dependencies": {
     "offensive": "^2.7.2",
