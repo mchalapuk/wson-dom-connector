@@ -30,10 +30,10 @@
     "jsdom": "^16.4.0",
     "mocha": "^8.1.1",
     "should": "^13.2.3",
-    "wson": "^2.7.1"
+    "wson": "^2.8.2"
   },
   "dependencies": {
-    "offensive": "^2.7.3",
+    "offensive": "^2.7.4",
     "simple-xpath-position": "^2.0.0"
   }
 }
